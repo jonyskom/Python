@@ -1,15 +1,48 @@
-### Hi there 👋
+### LIBREARIAS
+from importlib.resources import path
+import vertica_python
+import pandas as pd
+import openpyxl 
+import os
+from pathlib import Path
 
 
-**jonyskom/Jonyskom** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+conn_info =  { 'host': '00000000000',
+             'port': '111111',
+             'user': 'hola',
+             'password': '123455',
+             'database': 'casa',
+             'unicode_error': 'stricti',
+             'connection_load_balance': True
+    }
 
-Here are some ideas to get you started:
+with vertica_python.connect(**conn_info) as connection:
+    cur = connection.cursor()
+    cur.execute("SELECT ID_CUENTA_CLIENTE\
+                        ,SUSCRIPTOR\
+                        ,VOICE_LINE_MSISDN NUM_DN\
+                        ,FACTURA\
+                        ,NOMBRE_OFERTA_SOC NOMBRE_OFERTA\
+                        ,CODIGO_CARGO\
+                        ,DESCRIPCION_CARGO\
+                        ,(NVL(MONTO,0) + NVL(IMPUESTO_MONTO,0)) AS MONTO_TOTAL\
+                        ,(NVL(MONTO,0)) MONTO,(NVL(IMPUESTO_MONTO,0)) MONTO_IMPUESTO,FECHA_CREACION_SISTEMA\
+                    FROM SCH_PRD_SC.VST_FACTURA_DETALLE\
+                    WHERE 1=1 AND YEAR(FECHA_CREACION_SISTEMA)*100+MONTH(FECHA_CREACION_SISTEMA)\
+                        = '202208'\
+                    AND ID_CUENTA_CLIENTE in \
+(123432443')") 
+    df = pd.DataFrame(cur.fetchall(), columns = ['ID_CUENTA_CLIENTE','SUSCRIPTOR','NUM_DN','FACTURA','NOMBRE_OFERTA','CODIGO_CARGO','DESCRIPCION_CARGO','MONTO_TOTAL','MONTO','MONTO_IMPUESTO','FECHA_CREACION_SISTEMA'])
 
-🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
+    set_reset= df.set_index('ID_CUENTA_CLIENTE')
+    for row in cur.iterate():
+        print(set_reset)
+    
+    file_name = 'Detalle_Factura.xlsx'
+  
+    set_reset.to_excel(r'M:\ELITE\CLUB_ELITE\DETALLE CONSUMOS\DETALLE_FACTURACION\Reporte\Detalle_Factura.xlsx')
+    
+    os.chdir('M:\ELITE\CLUB_ELITE\DETALLE CONSUMOS\DETALLE_FACTURACION\Reporte')
+    os.system(file_name)
+cur.close()
+connection.close()
