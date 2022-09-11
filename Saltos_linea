@@ -1,0 +1,5 @@
+#El salto de linea se representa \n
+
+nombre = input("Por favor, introduce tu nombre: \n")
+
+print(nombre)
