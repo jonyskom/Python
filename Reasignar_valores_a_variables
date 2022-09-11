@@ -1,0 +1,5 @@
+a = "Este es mi valor inicial"
+print(a)
+
+a = "Mi valos ha cambiado"
+print(a)
