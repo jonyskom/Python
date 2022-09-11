@@ -1,0 +1,9 @@
+# siempre al declarar variable con minusculas y para espaciado _
+
+nombre_variable
+
+_variable1
+
+frase_bienvenida = "Primer dia de Python."
+
+print(frase_bienvenida)
