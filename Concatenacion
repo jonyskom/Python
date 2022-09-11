@@ -1,0 +1,5 @@
+#Concatener usando + 
+
+nombre = input("Por favor, introduce tu nombre: \n")
+
+print("Bienvenido " + nombre + ".")
