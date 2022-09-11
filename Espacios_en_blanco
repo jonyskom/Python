@@ -1,0 +1,5 @@
+# Los espacios no se ignoran ya que genera error de identacion.
+
+  # esto no se puede
+ frase_bienvenida = "Pirmer dia de Python."
+print(frase_bienvenida)
