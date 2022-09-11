@@ -1,0 +1,8 @@
+# cpn esta funcion recibe la entrada de datos
+input("Por favor, introduce tu nombre: ")
+
+#Los imput hay que almacenarlos en una varibale asi recibira la entrada
+
+nombre = input("Por favor, introduce tu nombre: ")
+
+print(nombre)
