@@ -1,0 +1,18 @@
+import smtplib
+import win32com.client
+
+outlook = win32com.client.Dispatch('outlook.application')
+
+mail = outlook.CreateItem(0)
+
+receivers_mail = ['t.com>', 'M.com>']
+receivers_CC = ['M.com>','C.com>']
+mail.To = ";".join(receivers_mail)
+
+mail.Subject = 'ST | Tacrift | 2022-08-'
+mail.HTMLBody = '<h3>Hola ! Buena tarde, se comparte la actualización del reporte Tacrift – ST al día 15 de Agosto del  2022.</h3>'
+mail.Body = "Hola ! Buena tarde, se comparte la actualización del reporte Tacrift – ST al día 15 de Agosto del  2022."
+mail.Attachments.Add('M:\SERVICIO_TECNICO\REPORTE\ST - Tacrift\\ATT Survey Report ST v1.2.xlsm')
+mail.CC = ";".join(receivers_CC)
+
+mail.display()
