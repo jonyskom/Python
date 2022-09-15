@@ -1,0 +1,30 @@
+
+from re import A
+from tkinter import N
+
+
+reto = "Estoy en el dia 1 del reto python. "
+print(reto)
+
+
+ #reasignar variable a que sea d = verde
+a = "rojo"
+b = "naranja"
+c = "azul"
+d = "verde"
+
+print(a)
+#asignar valor  rojo sin usar c=a
+b = a 
+c = a
+
+
+
+print(a)
+
+#Sacar estos 2 string juntos en un print
+
+frase_1 = "Me llamo sandra"
+frase_2 = "y tengo 23 años"
+
+print(frase_1 + " " +  frase_2)
